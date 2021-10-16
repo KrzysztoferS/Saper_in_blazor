@@ -1,0 +1,32 @@
+﻿<h3>GameField</h3>
+
+To jest pole gry ziom!!!!
+<table>
+    @for (int i = 0; i < NumberOfRows; i++)
+    {
+        int row=i;
+        <tr>
+            @for (int j = 0; j < NumberOfColumns; j++)
+            {
+                int col = j;
+                <td width="10px" height="10px" @onclick="@(e=>TableFieldClicked(e,row,col))">Row:@i, Col:@j</td>
+            }
+        </tr>
+    }
+</table>
+    <div>Kliknieto pole:@clickedRow , @clickedCol  </div>
+
+@code {
+    [Parameter]
+    public int NumberOfColumns { get; set; } = 10;
+    [Parameter]
+    public int NumberOfRows { get; set; } = 10;
+
+    public int clickedRow, clickedCol;
+
+    public void TableFieldClicked(MouseEventArgs e, int row, int column)
+    {
+        clickedCol = column;
+        clickedRow = row;
+    }
+}
