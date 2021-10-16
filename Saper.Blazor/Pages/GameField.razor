@@ -1,4 +1,6 @@
-﻿<h3>GameField</h3>
+﻿<link rel="stylesheet" href="css/NodeStyle.css" />
+
+<h3>GameField</h3>
 
 To jest pole gry ziom!!!!
 <table>
@@ -9,12 +11,19 @@ To jest pole gry ziom!!!!
             @for (int j = 0; j < NumberOfColumns; j++)
             {
                 int col = j;
-                <td width="10px" height="10px" @onclick="@(e=>TableFieldClicked(e,row,col))">Row:@i, Col:@j</td>
+
+
+                <td class="@GetStyle(row,col)" oncontextmenu="return false;" 
+                    @onclick="@(e => TableFieldClicked(e, row, col))" 
+                    @onmouseup="CheckButton"
+                    @ondblclick="DbClicked" ></td>
             }
         </tr>
     }
 </table>
     <div>Kliknieto pole:@clickedRow , @clickedCol  </div>
+    <div>Double Clicked:@dbClick</div>
+    <div>Klinketo klawisz:@klawisz</div>
 
 @code {
     [Parameter]
@@ -23,10 +32,39 @@ To jest pole gry ziom!!!!
     public int NumberOfRows { get; set; } = 10;
 
     public int clickedRow, clickedCol;
+    public bool dbClick = false;
+    public string klawisz = "zaden";
 
     public void TableFieldClicked(MouseEventArgs e, int row, int column)
     {
         clickedCol = column;
         clickedRow = row;
+        dbClick = false;
+        klawisz = "lewy";
     }
+
+    public void CheckButton(MouseEventArgs e)
+    {
+        if (e.Button == 2)
+        {
+            klawisz = "prawy";
+        }
+    }
+
+    public string FieldValue()
+    {
+        return "dd";
+    }
+    public string GetStyle(int row, int column)
+    {
+        if ((row + column) % 2 == 0) return "hidden";
+
+        return "empty";
+    }
+
+    public void DbClicked()
+    {
+        dbClick = true;
+    }
+
 }

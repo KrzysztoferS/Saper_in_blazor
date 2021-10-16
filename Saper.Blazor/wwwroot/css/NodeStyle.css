@@ -1,0 +1,14 @@
+﻿
+td{
+    width:20px;
+    height:20px;
+    border:2px solid red;
+}
+
+.hidden{
+    background-color:blue;
+}
+
+.empty{
+    background-color:yellow;
+}

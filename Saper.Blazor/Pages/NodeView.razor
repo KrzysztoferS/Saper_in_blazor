@@ -1,0 +1,35 @@
+﻿
+
+<style>
+    .node_view{
+        width:20px;
+        height:20px;
+        background-color:@SetColor();
+    }
+
+</style>
+
+<div class="node_view" ></div>
+
+@code {
+    [Parameter]
+    public string NodeStatus { get; set; }
+
+    //private string color;
+
+    private string SetColor()
+    {
+        switch (NodeStatus)
+        {
+            case "Hidden":
+                return "black";
+                
+            case "Empty":
+                return "red";
+                
+            default:
+                return "white";
+                
+        }
+    }
+}
