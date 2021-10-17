@@ -23,6 +23,8 @@ namespace Saper.Blazor.Services
 
             numberOfBombs = bombs;
             SetBombsOnField();
+
+            SetNodesStatus();
         }
         //fills game field with gmanode objects assigning them row and col numbers and status
         private void FillGameField(int rows,int columns)
@@ -92,19 +94,34 @@ namespace Saper.Blazor.Services
             else return;
         }
 
+        public void SetNodesStatus()
+        {
+            foreach(var node in GameField)
+            {
+                if (node.nodeStatus == Helpers.NodeStatus.Empty)
+                {
+                    int adjacentBombs = 0;
+                    foreach(var adjNode in node.adjacentNodes)
+                    {
+                        if (GameField[adjNode.X, adjNode.Y].nodeStatus == Helpers.NodeStatus.Bomb) adjacentBombs++;
+                    }
+                    node.nodeStatus = (Helpers.NodeStatus)adjacentBombs;
+                }
+            }
+        }
+
         public List<GameNode> GetEmptyNodes()
         {
             List<GameNode> emptyNodes = new List<GameNode>();
-            for(int row=0; row<numberOfRows; row++)
-            {
-                for (int col = 0; col < numberOfColumns; col++)
+            
+                foreach (var node in GameField)
                 {
-                    if(GameField[row, col].nodeStatus == Helpers.NodeStatus.Empty)
+                    if(node.nodeStatus == Helpers.NodeStatus.Empty)
                     {
-                        emptyNodes.Add(GameField[row, col]); 
+                        emptyNodes.Add(node); 
                     }
                 }
-            }
+            
             return emptyNodes;
         }
 

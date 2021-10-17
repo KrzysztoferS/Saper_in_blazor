@@ -8,10 +8,7 @@ namespace Saper.Blazor.Helpers
     //Enum contains names of nodes status in the game
     public enum NodeStatus
     {
-        Hidden,
         Empty,
-        Bomb,
-        Flag,
         One,
         Two,
         Three,
@@ -19,7 +16,9 @@ namespace Saper.Blazor.Helpers
         Five,
         Six,
         Seven,
-        Eight
+        Eight,
+        Bomb,
+        Flag,
     }
 
     public class Helper

@@ -14,11 +14,17 @@ To jest pole gry ziom!!!!
                 int col = j;
 
 
-                <td class="@GetStyle(row,col)" oncontextmenu="return false;" 
-                    @onclick="@(e => TableFieldClicked(e, row, col))" 
-                    @onmouseup="CheckButton"
-                    @ondblclick="DbClicked" >
-                </td>
+
+
+            <td class="@GetStyle(row,col)" oncontextmenu="return false;"
+                @onclick="@(e => TableFieldClicked(e, row, col))"
+                @onmouseup="CheckButton"
+                @ondblclick="DbClicked">
+                @if (gameService.GetGameField()[row, col] == Helpers.NodeStatus.Bomb)
+                {<h2>*</h2>}
+                else if ((int)gameService.GetGameField()[row, col] > 0 && (int)gameService.GetGameField()[row, col] < 9){
+                    <h2>@((int)gameService.GetGameField()[row, col])</h2> }
+            </td>
             }
         </tr>
     }
@@ -28,16 +34,24 @@ To jest pole gry ziom!!!!
     <div>Klinketo klawisz:@klawisz</div>
 
 @code {
-    [Parameter]
-    public int NumberOfColumns { get; set; } = 10;
-    [Parameter]
-    public int NumberOfRows { get; set; } = 10;
-    [Parameter]
-    public GameService _GameService { get; set; }
+        [Parameter]
+        public int NumberOfColumns { get; set; } = 10;
+        [Parameter]
+        public int NumberOfRows { get; set; } = 10;
+        [Parameter]
+        public GameService _GameService { get; set; }
+
+    private GameService gameService;
 
     public int clickedRow, clickedCol;
     public bool dbClick = false;
     public string klawisz = "zaden";
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        gameService = _GameService;
+    }
 
     public void TableFieldClicked(MouseEventArgs e, int row, int column)
     {
