@@ -12,13 +12,14 @@ namespace Saper.Blazor.Services
         readonly int numberOfColumns;
         readonly int numberOfBombs;
 
-        private GameNode[,] gameField;
+        public GameNode[,] GameField { get; private set; }
 
         public GameService(int rows, int columns, int bombs)
         {
             numberOfRows = rows;
             numberOfColumns = columns;
-            gameField = new GameNode[numberOfRows, numberOfColumns];
+            GameField = new GameNode[numberOfRows, numberOfColumns];
+            FillGameField(numberOfRows, numberOfColumns);
 
             numberOfBombs = bombs;
             SetBombsOnField();
@@ -30,7 +31,7 @@ namespace Saper.Blazor.Services
             {
                 for(int col=0; col<columns; col++)
                 {
-                    gameField[row, col] = new GameNode(row, col, GetAdjacentNodes(row, col));
+                    GameField[row, col] = new GameNode(row, col, GetAdjacentNodes(row, col));
                 }
             }
         }
@@ -77,6 +78,7 @@ namespace Saper.Blazor.Services
         private void SetBombsOnField()
         {
             List<GameNode> emptyNodes = GetEmptyNodes();
+
             if (emptyNodes != null && emptyNodes.Count > numberOfBombs)
             {
                 Random rnd = new Random();
@@ -90,12 +92,18 @@ namespace Saper.Blazor.Services
             else return;
         }
 
-        private List<GameNode> GetEmptyNodes()
+        public List<GameNode> GetEmptyNodes()
         {
             List<GameNode> emptyNodes = new List<GameNode>();
-            foreach(var node in gameField)
+            for(int row=0; row<numberOfRows; row++)
             {
-                if (node.nodeStatus == Helpers.NodeStatus.Empty) emptyNodes.Add(node);
+                for (int col = 0; col < numberOfColumns; col++)
+                {
+                    if(GameField[row, col].nodeStatus == Helpers.NodeStatus.Empty)
+                    {
+                        emptyNodes.Add(GameField[row, col]); 
+                    }
+                }
             }
             return emptyNodes;
         }
@@ -108,7 +116,7 @@ namespace Saper.Blazor.Services
             {
                 for(int col=0; col < numberOfColumns; col++)
                 {
-                    nodesStatus[row,col]=gameField[row,col].nodeStatus;
+                    nodesStatus[row,col]=GameField[row,col].nodeStatus;
                 }
             }
 

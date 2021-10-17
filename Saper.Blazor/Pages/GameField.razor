@@ -1,4 +1,4 @@
-﻿
+﻿@using Services;
 
 <link rel="stylesheet" href="css/NodeStyle.css" />
 <h3>GameField</h3>
@@ -32,7 +32,8 @@ To jest pole gry ziom!!!!
     public int NumberOfColumns { get; set; } = 10;
     [Parameter]
     public int NumberOfRows { get; set; } = 10;
-
+    [Parameter]
+    public GameService _GameService { get; set; }
 
     public int clickedRow, clickedCol;
     public bool dbClick = false;
