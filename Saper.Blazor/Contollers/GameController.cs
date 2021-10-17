@@ -60,9 +60,55 @@ namespace Saper.Blazor.Contollers
             }
             if ((row - 1) >=0 && (col + 1) < columns)
             {
-                adjacentNodes.Add(new Node(row + 1, col + 1));
+                adjacentNodes.Add(new Node(row - 1, col + 1));
             }
             return adjacentNodes;
+        }
+
+        public List<GameNode> GetEmptyNodes(GameNode[,] gameField)
+        {
+            List<GameNode> emptyNodes = new List<GameNode>();
+
+            foreach (var node in gameField)
+            {
+                if (node.nodeStatus == Helpers.NodeStatus.Empty)
+                {
+                    emptyNodes.Add(node);
+                }
+            }
+
+            return emptyNodes;
+        }
+
+        public void SetBombsOnField(GameNode[,] gameField, int numberOfBombs)
+        {
+            List<GameNode> emptyNodes = GetEmptyNodes(gameField);
+
+            if (emptyNodes != null && emptyNodes.Count > numberOfBombs)
+            {
+                Random rnd = new Random();
+                for (int i = 0; i < numberOfBombs; i++)
+                {
+                    int node = rnd.Next(0, emptyNodes.Count);
+                    emptyNodes[node].nodeStatus = Helpers.NodeStatus.Bomb;
+                    emptyNodes.RemoveAt(node);
+                }
+            }
+            else return;
+        }
+
+       
+        public void SetNodesStatus(GameNode[,] gameField)
+        {
+            foreach(var node in GetEmptyNodes(gameField))
+            {
+                int adjacentBombs = 0;
+                foreach(var adjacentNode in node.adjacentNodes)
+                {
+                    if (gameField[adjacentNode.X, adjacentNode.Y].nodeStatus == Helpers.NodeStatus.Bomb) adjacentBombs++;
+                }
+                node.nodeStatus = (Helpers.NodeStatus)adjacentBombs;
+            }
         }
     }
 

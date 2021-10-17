@@ -21,8 +21,8 @@ namespace Saper.Test
         public void Test2()
         {
             GameService gameService = new GameService(5, 5, 5);
-
-            //int a = gameService.GetEmptyNodes().Count;
+            //gameService.StartGame();
+            
             int counter = 0;
             foreach(var node in gameService.GameField)
             {
@@ -31,15 +31,6 @@ namespace Saper.Test
 
             Assert.AreEqual(5,counter);
         }
-        [Test]
-        public void Test3()
-        {
-            GameService gameService = new GameService(5, 5, 5);
-
-            int a = gameService.GetEmptyNodes().Count;
-          
-
-            Assert.AreEqual(20, a);
-        }
+        
     }
 }

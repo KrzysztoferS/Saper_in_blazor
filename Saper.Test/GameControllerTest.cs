@@ -18,6 +18,50 @@ namespace Saper.Test
             
         }
 
+        [Test]
+        public void CheckNodeNumbers()
+        {
+            _gameController.FillGameField(gameField);
+
+            Assert.AreEqual(0, gameField[0, 0].X);
+            Assert.AreEqual(0, gameField[0, 0].Y);
+
+            Assert.AreEqual(1, gameField[1, 1].X);
+            Assert.AreEqual(1, gameField[1, 1].Y);
+
+            Assert.AreEqual(2, gameField[2, 2].X);
+            Assert.AreEqual(2, gameField[2, 2].Y);
+
+            Assert.AreEqual(0, gameField[0, 2].X);
+            Assert.AreEqual(2, gameField[0, 2].Y);
+
+         
+        }
+
+        [Test]
+        public void SetNodesStatus()
+        {
+            _gameController.FillGameField(gameField);
+            //_gameController.SetBombsOnField(gameField,2);
+            gameField[0, 0].nodeStatus = Blazor.Helpers.NodeStatus.Bomb;
+            gameField[2, 2].nodeStatus = Blazor.Helpers.NodeStatus.Bomb;
+            _gameController.SetNodesStatus(gameField);
+
+            Assert.AreEqual(Blazor.Helpers.NodeStatus.One, gameField[1, 0].nodeStatus);
+        }
+
+
+        [Test]
+        public void GameControllerFillTest()
+        {
+            _gameController.FillGameField(gameField);
+            foreach(var node in gameField)
+            {
+                Assert.IsNotNull(node);
+            }
+        }
+
+
         //Get adjacent nodes numbers
         [Test]
         public void Test1()
