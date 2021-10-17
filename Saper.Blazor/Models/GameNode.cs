@@ -12,9 +12,11 @@ namespace Saper.Blazor.Objects
         public List<Node> adjacentNodes;
         public NodeStatus nodeStatus;
 
-        public GameNode(int x, int y, List<Node> nodes, NodeStatus _nodeStatus=NodeStatus.Hidden):base( x, y)
+        public GameNode(int x, int y, List<Node> nodes, NodeStatus _nodeStatus=NodeStatus.Empty, bool visited=false):base( x, y)
         {
             adjacentNodes = nodes;
+            nodeStatus = _nodeStatus;
+            Visited = visited;
         }
 
     }

@@ -1,5 +1,6 @@
-﻿<link rel="stylesheet" href="css/NodeStyle.css" />
+﻿
 
+<link rel="stylesheet" href="css/NodeStyle.css" />
 <h3>GameField</h3>
 
 To jest pole gry ziom!!!!
@@ -16,7 +17,8 @@ To jest pole gry ziom!!!!
                 <td class="@GetStyle(row,col)" oncontextmenu="return false;" 
                     @onclick="@(e => TableFieldClicked(e, row, col))" 
                     @onmouseup="CheckButton"
-                    @ondblclick="DbClicked" ></td>
+                    @ondblclick="DbClicked" >
+                </td>
             }
         </tr>
     }
@@ -30,6 +32,7 @@ To jest pole gry ziom!!!!
     public int NumberOfColumns { get; set; } = 10;
     [Parameter]
     public int NumberOfRows { get; set; } = 10;
+
 
     public int clickedRow, clickedCol;
     public bool dbClick = false;
