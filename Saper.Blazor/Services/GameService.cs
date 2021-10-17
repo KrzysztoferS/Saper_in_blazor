@@ -100,9 +100,19 @@ namespace Saper.Blazor.Services
             return emptyNodes;
         }
 
-        public GameNode[,] GetGameField()
+        public Helpers.NodeStatus[,] GetGameField()
         {
-            return gameField;
+            Helpers.NodeStatus[,] nodesStatus = new Helpers.NodeStatus[numberOfRows, numberOfColumns];
+
+            for(int row=0; row < numberOfRows; row++)
+            {
+                for(int col=0; col < numberOfColumns; col++)
+                {
+                    nodesStatus[row,col]=gameField[row,col].nodeStatus;
+                }
+            }
+
+            return nodesStatus;
         }
     }
 }
