@@ -63,6 +63,7 @@ namespace Saper.Blazor.Contollers
                 adjacentNodes.Add(new Node(row - 1, col + 1));
             }
             return adjacentNodes;
+        
         }
 
         public List<GameNode> GetEmptyNodes(GameNode[,] gameField)

@@ -12,13 +12,20 @@ To jest pole gry ziom!!!!
             @for (int j = 0; j < NumberOfColumns; j++)
             {
                 int col = j;
-
+                int ndStatus = (int)gameService.GameField[row, col].nodeStatus;
 
             <td class="@GetStyle(row,col)" oncontextmenu="return false;"
                 @onclick="@(e => TableFieldClicked(e, row, col))"
                 @onmouseup="CheckButton"
                 @ondblclick="DbClicked">
                 
+                @if(ndStatus>0 && ndStatus <= 8)
+                    {
+                        @gameService.GameField[row, col].nodeStatus;
+                } else if (gameService.GameField[row,col].nodeStatus == Helpers.NodeStatus.Bomb)
+                {
+                    <div>*</div>
+                }
             </td>
             }
         </tr>
@@ -29,14 +36,22 @@ To jest pole gry ziom!!!!
     <div>Klinketo klawisz:@klawisz</div>
 
 @code {
-        [Parameter]
-        public int NumberOfColumns { get; set; } = 10;
-        [Parameter]
-        public int NumberOfRows { get; set; } = 10;
-       // [Parameter]
-       // public GameService _GameService { get; set; }
+    [Parameter]
+    public int NumberOfColumns { get; set; } = 10;
+    [Parameter]
+    public int NumberOfRows { get; set; } = 10;
+    [Parameter]
+    public GameService _GameService { get; set; }
 
-   // private GameService gameService;
+    private GameService gameService;
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        gameService = _GameService;
+    }
+
+    // private GameService gameService;
 
     public int clickedRow, clickedCol;
     public bool dbClick = false;
