@@ -4,7 +4,7 @@
 
 <h3>SaperMainPage</h3>
 <Timer></Timer>
-<GameField NumberOfColumns="5" NumberOfRows="5" _GameService="@_gameService"></GameField>
+<GameField _GameService="@_gameService"></GameField>
 
 
 @code {
@@ -15,7 +15,7 @@
     protected override void OnInitialized()
     {
         //base.OnInitialized();
-        _gameService = new GameService(5, 5, 2);
+        _gameService = new GameService(10, 10, 15);
         //_gameService.StartGame();
     }
 }

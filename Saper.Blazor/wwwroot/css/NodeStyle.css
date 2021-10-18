@@ -3,6 +3,7 @@ td{
     width:20px;
     height:20px;
     border:2px solid red;
+    text-align:center;
 }
 
 .hidden{
@@ -11,4 +12,8 @@ td{
 
 .empty{
     background-color:yellow;
+}
+
+.visited{
+    background-color:red;
 }

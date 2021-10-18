@@ -111,6 +111,11 @@ namespace Saper.Blazor.Contollers
                 node.nodeStatus = (Helpers.NodeStatus)adjacentBombs;
             }
         }
+
+        public void SetNodeAsVisited(GameNode gameNode)
+        {
+            gameNode.Visited = true;
+        }
     }
 
 }

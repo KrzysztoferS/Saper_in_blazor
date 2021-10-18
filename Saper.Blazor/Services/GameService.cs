@@ -56,5 +56,10 @@ namespace Saper.Blazor.Services
 
             return nodesStatus;
         }
+
+        public void OnClick(int row, int col)
+        {
+            gameController.SetNodeAsVisited(GameField[row, col]);
+        }
     }
 }

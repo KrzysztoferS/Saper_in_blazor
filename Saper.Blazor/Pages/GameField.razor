@@ -5,11 +5,11 @@
 
 To jest pole gry ziom!!!!
 <table>
-    @for (int i = 0; i < NumberOfRows; i++)
+    @for (int i = 0; i < numberOfRows; i++)
     {
         int row=i;
         <tr>
-            @for (int j = 0; j < NumberOfColumns; j++)
+            @for (int j = 0; j < numberOfColumns; j++)
             {
                 int col = j;
                 int ndStatus = (int)gameService.GameField[row, col].nodeStatus;
@@ -21,7 +21,7 @@ To jest pole gry ziom!!!!
                 
                 @if(ndStatus>0 && ndStatus <= 8)
                     {
-                        @gameService.GameField[row, col].nodeStatus;
+                        @((int)gameService.GameField[row, col].nodeStatus);
                 } else if (gameService.GameField[row,col].nodeStatus == Helpers.NodeStatus.Bomb)
                 {
                     <div>*</div>
@@ -37,18 +37,19 @@ To jest pole gry ziom!!!!
 
 @code {
     [Parameter]
-    public int NumberOfColumns { get; set; } = 10;
-    [Parameter]
-    public int NumberOfRows { get; set; } = 10;
-    [Parameter]
     public GameService _GameService { get; set; }
 
+
+    private int numberOfColumns;
+    private int numberOfRows;
     private GameService gameService;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
         gameService = _GameService;
+        numberOfRows = _GameService.GameField.GetLength(0);
+        numberOfColumns = _GameService.GameField.GetLength(1);
     }
 
     // private GameService gameService;
@@ -63,6 +64,7 @@ To jest pole gry ziom!!!!
         clickedRow = row;
         dbClick = false;
         klawisz = "lewy";
+        gameService.OnClick(row, column);
     }
 
     public void CheckButton(MouseEventArgs e)
@@ -79,7 +81,11 @@ To jest pole gry ziom!!!!
     }
     public string GetStyle(int row, int column)
     {
-        if ((row + column) % 2 == 0) return "hidden";
+
+        if (gameService.GameField[row, column].Visited)
+        {
+            return "hidden";
+        }
 
         return "empty";
     }
