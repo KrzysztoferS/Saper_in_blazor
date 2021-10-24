@@ -9,6 +9,7 @@ namespace Saper.Blazor.Objects
     public class GameNode:Node 
     {
         public bool Visited { get; set; } = false;
+        public bool IsFlagged { get; set; }
         public List<Node> adjacentNodes;
         public NodeStatus nodeStatus;
 

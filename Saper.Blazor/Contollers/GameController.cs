@@ -1,4 +1,5 @@
-﻿using Saper.Blazor.Objects;
+﻿using Saper.Blazor.Abstraction;
+using Saper.Blazor.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,13 @@ namespace Saper.Blazor.Contollers
 
     public class GameController
     {
+        private INodeFinder nodeFinder;
+
+        public GameController()
+        {
+            nodeFinder = new NodeFinder();
+        }
+
         public GameNode[,] FillGameField(GameNode[,] gameField)
         {
             int rows = gameField.GetLength(0);
@@ -116,6 +124,17 @@ namespace Saper.Blazor.Contollers
         {
             gameNode.Visited = true;
         }
+
+        public void OpenNodes(GameNode[,] gameField, GameNode gameNode)
+        {
+            List<GameNode> nodesToOpen = nodeFinder.FindNodes(gameField, gameNode);
+
+            foreach(var node in nodesToOpen)
+            {
+                SetNodeAsVisited(node);
+            }
+        }
+
     }
 
 }
