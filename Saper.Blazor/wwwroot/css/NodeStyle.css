@@ -7,13 +7,17 @@ td{
 }
 
 .hidden{
-    background-color:blue;
+    background-color:#e5e5e5;
 }
 
 .empty{
-    background-color:yellow;
+    background-color:#4cff00;
 }
 
 .visited{
-    background-color:red;
+    background-color:#ffd800;
+}
+.one{
+    background-color:#28ccd1;
+    border:2px solid green;
 }

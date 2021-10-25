@@ -62,5 +62,10 @@ namespace Saper.Blazor.Services
             //gameController.SetNodeAsVisited(GameField[row, col]);
             gameController.OpenNodes(GameField, GameField[row, col]);
         }
+
+        public void OnRightClick(int row, int col)
+        {
+            gameController.SetFlag(GameField[row, col]);
+        }
     }
 }

@@ -18,7 +18,7 @@ To jest pole gry ziom!!!!
 
 <td class="@GetStyle(row,col)" oncontextmenu="return false;"
                 @onclick="@(e => TableFieldClicked(e, row, col))"
-                @onmouseup="CheckButton"
+                @onmouseup="@(e=> CheckButton(e,row,col))"
                 @ondblclick="DbClicked">
                 
                 @if (gameService.GameField[row, col].Visited) { 
@@ -28,7 +28,7 @@ To jest pole gry ziom!!!!
                 } else if (gameService.GameField[row, col].nodeStatus == Helpers.NodeStatus.Bomb)
                 {
                     <div>*</div>
-                    } }
+                    } } else if (gameService.GameField[row, col].IsFlagged) { <div>f</div>}
             </td>
             }
         </tr>
@@ -70,11 +70,12 @@ To jest pole gry ziom!!!!
         gameService.OnClick(row, column);
     }
 
-    public void CheckButton(MouseEventArgs e)
+    public void CheckButton(MouseEventArgs e,int row, int col)
     {
         if (e.Button == 2)
         {
             klawisz = "prawy";
+            gameService.OnRightClick(row, col);
         }
     }
 

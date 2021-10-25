@@ -135,6 +135,15 @@ namespace Saper.Blazor.Contollers
             }
         }
 
+        public void SetFlag(GameNode gameNode)
+        {
+            if (gameNode.IsFlagged == false)
+            {
+                gameNode.IsFlagged = true;
+            }
+            else gameNode.IsFlagged = false;
+        }
+
     }
 
 }
