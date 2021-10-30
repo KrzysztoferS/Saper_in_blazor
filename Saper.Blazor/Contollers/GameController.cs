@@ -10,11 +10,22 @@ namespace Saper.Blazor.Contollers
 
     public class GameController
     {
+        public int NumberOfVisitedNodes { get; private set; }
+        public int NumberOfClicks { get; set; }
+
         private INodeFinder nodeFinder;
+
 
         public GameController()
         {
             nodeFinder = new NodeFinder();
+            StartGame();
+        }
+
+        public void StartGame()
+        {
+            NumberOfClicks = 0;
+            NumberOfVisitedNodes = 0;
         }
 
         public GameNode[,] FillGameField(GameNode[,] gameField)
@@ -132,6 +143,7 @@ namespace Saper.Blazor.Contollers
             foreach(var node in nodesToOpen)
             {
                 SetNodeAsVisited(node);
+                NumberOfVisitedNodes++;
             }
         }
 
@@ -143,6 +155,8 @@ namespace Saper.Blazor.Contollers
             }
             else gameNode.IsFlagged = false;
         }
+
+       
 
     }
 
