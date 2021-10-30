@@ -10,8 +10,11 @@ namespace Saper.Blazor.Contollers
 {
     public class NodeFinder : INodeFinder
     {
+        private int iteration = 0;
+
         public List<GameNode> FindNodes(GameNode[,] gameField, GameNode gameNode)
         {
+            iteration++;
             List<GameNode> nodesToOpen = new List<GameNode>();
             //lista zawiera wezly ktore nalezy przeszukac
             List<GameNode> nodesToCheck = new List<GameNode>();
@@ -27,6 +30,7 @@ namespace Saper.Blazor.Contollers
                 if (gameField[i.X,i.Y].Visited == false)
                 {
                     nodesToCheck.Add(gameField[i.X,i.Y]);
+                    gameField[i.X, i.Y].AnimationDelay = iteration;
                     gameField[i.X,i.Y].Visited = true;
                     //numberOfVisitedNodes++;
                     if (gameField[i.X,i.Y].IsFlagged == false && gameField[i.X,i.Y].nodeStatus == Helpers.NodeStatus.Empty)

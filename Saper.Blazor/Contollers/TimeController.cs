@@ -8,17 +8,35 @@ namespace Saper.Blazor.Contollers
 {
     public class TimeController : ITimer
     {
-        public float Time { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public bool TimeIsOn { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public float Time { get; set; }
+        public bool TimeIsOn { get; set; }
 
-        public void StartTime()
+        public TimeController()
         {
-            throw new NotImplementedException();
+            Time = 0;
+            TimeIsOn = false;
+        }
+
+        public async void StartTime()
+        {
+            TimeIsOn = true;
+            Time = 0;
+            while (TimeIsOn)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    await Task.Delay(100);
+                }
+                Time++;
+                //Tutaj rzucic evetem ze minela sekunda
+            }
         }
 
         public float StopTime()
         {
-            throw new NotImplementedException();
+            TimeIsOn = false;
+            return Time;
         }
     }
 }
+

@@ -12,12 +12,14 @@ namespace Saper.Blazor.Objects
         public bool IsFlagged { get; set; }
         public List<Node> adjacentNodes;
         public NodeStatus nodeStatus;
+        public float AnimationDelay { get; set; }
 
         public GameNode(int x, int y, List<Node> nodes, NodeStatus _nodeStatus=NodeStatus.Empty, bool visited=false):base( x, y)
         {
             adjacentNodes = nodes;
             nodeStatus = _nodeStatus;
             Visited = visited;
+            AnimationDelay = 0;
         }
 
     }

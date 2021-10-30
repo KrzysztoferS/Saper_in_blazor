@@ -10,21 +10,39 @@ td{
     color:red;
     font-weight:bold;
 }
-.hidden{
-    background-color:#808080;
+.hidden {
+    background-color: #808080;
 }
 
-.empty{
-    background-color:#e5e5e5;
+.empty {
+    background-color: #e5e5e5;
+    animation-name: flash;
+    animation-duration: 2.3s;
 }
 
 .visited {
     background-color: #e5e5e5;
+    animation-name:flash;
+    animation-duration:2s;
 }
 .one {
     background-color: #e5e5e5;
     color: #002cff;
+    animation-name: flash;
+    animation-duration: 2s;
+    
 }
 .bomb{
     background-color:#ff0000;
+}
+
+@keyframes flash{
+    from {
+        background-color: #808080;
+        color: #808080;
+    }
+    to {
+        background-color: #e5e5e5;
+        color: #002cff;
+    }
 }

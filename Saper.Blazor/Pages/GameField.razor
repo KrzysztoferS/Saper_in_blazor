@@ -16,7 +16,7 @@ To jest pole gry ziom!!!!
 
 
 
-<td class="@GetStyle(row,col)" oncontextmenu="return false;"
+<td class="@GetStyle(row,col)" oncontextmenu="return false;" style="@GetAnimationDelay(row,col)" 
                 @onclick="@(e => TableFieldClicked(e, row, col))"
                 @onmouseup="@(e=> CheckButton(e,row,col))"
                 @ondblclick="DbClicked">
@@ -119,7 +119,12 @@ To jest pole gry ziom!!!!
             return "flagged";
         } else
 
-        return "hidden";
+            return "hidden";
+    }
+
+    public string GetAnimationDelay(int row, int column)
+    {
+        return "animation - delay:"+gameService.GameField[row, column].AnimationDelay.ToString();
     }
 
     public void DbClicked()
