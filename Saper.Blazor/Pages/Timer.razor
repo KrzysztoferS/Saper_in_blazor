@@ -1,6 +1,8 @@
 ﻿<h3>Timer:@time</h3>
 <button @onclick="Clock">Start Time</button>
 @code {
+
+    public ITimer Timer { get; set; }
     public int time = 0;
     bool clocksOn = false;
 

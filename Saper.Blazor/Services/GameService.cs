@@ -16,7 +16,7 @@ namespace Saper.Blazor.Services
         public GameNode[,] GameField { get; private set; }
 
         private GameController gameController;
-        private bool gameOver;
+        public bool gameOver;
 
         public GameService(int rows, int columns, int bombs)
         {
@@ -38,6 +38,7 @@ namespace Saper.Blazor.Services
             gameController.FillGameField(GameField);
             gameController.SetBombsOnField(GameField, numberOfBombs);
             gameController.SetNodesStatus(GameField);
+            gameOver = false;
         }
        
 
@@ -64,10 +65,7 @@ namespace Saper.Blazor.Services
             if (!gameOver)
             {
                 gameController.OpenNodes(GameField, GameField[row, col]);
-                if (GameField[row, col].nodeStatus == Helpers.NodeStatus.Bomb)
-                {
-                    Loose();
-                }
+                gameOver = gameController.IsGameOver(GameField, GameField[row, col], numberOfBombs);
             }
         }
 
@@ -76,26 +74,27 @@ namespace Saper.Blazor.Services
             gameController.SetFlag(GameField[row, col]);
         }
 
-        public bool IsGameInProgress()
-        {
-            if(((numberOfColumns*numberOfRows)-numberOfBombs)==gameController.NumberOfVisitedNodes)
-            {
-                Win();
-                return false;
-            }
-            return false;
-        }
 
         public void Win()
         {
             //TODO
-            gameOver = true;
+           
         }
 
         public void Loose()
         {
             //TODO
-            gameOver = true;
+          
+        }
+
+        public int VistedNodes()
+        {
+            return gameController.NumberOfVisitedNodes;
+        }
+
+        public void Restart()
+        {
+            StartGame();
         }
     }
 }

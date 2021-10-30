@@ -1,23 +1,30 @@
 ﻿
 td{
-    width:140px;
-    height:140px;
+    width:40px;
+    height:40px;
     border:2px solid red;
     text-align:center;
 }
-
+.flagged {
+    background-color: #808080;
+    color:red;
+    font-weight:bold;
+}
 .hidden{
-    background-color:#e5e5e5;
+    background-color:#808080;
 }
 
 .empty{
-    background-color:#4cff00;
+    background-color:#e5e5e5;
 }
 
-.visited{
-    background-color:#ffd800;
+.visited {
+    background-color: #e5e5e5;
 }
-.one{
-    background-color:#28ccd1;
-    border:2px solid green;
+.one {
+    background-color: #e5e5e5;
+    color: #002cff;
+}
+.bomb{
+    background-color:#ff0000;
 }

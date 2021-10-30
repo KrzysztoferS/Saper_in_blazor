@@ -34,6 +34,9 @@ To jest pole gry ziom!!!!
         </tr>
     }
 </table>
+<button @onclick="_GameService.Restart">RESTART</button>
+<div>Liczba odwiedzoanych wezłów: @visitedNodes </div>
+<div>GameOver:@gameOver   </div>
     <div>Kliknieto pole:@clickedRow , @clickedCol  </div>
     <div>Double Clicked:@dbClick</div>
     <div>Klinketo klawisz:@klawisz</div>
@@ -60,6 +63,8 @@ To jest pole gry ziom!!!!
     public int clickedRow, clickedCol;
     public bool dbClick = false;
     public string klawisz = "zaden";
+    public int visitedNodes = 0;
+    public bool gameOver = false;
 
     public void TableFieldClicked(MouseEventArgs e, int row, int column)
     {
@@ -68,6 +73,8 @@ To jest pole gry ziom!!!!
         dbClick = false;
         klawisz = "lewy";
         gameService.OnClick(row, column);
+        visitedNodes = gameService.VistedNodes();
+        gameOver = gameService.gameOver;
     }
 
     public void CheckButton(MouseEventArgs e,int row, int col)
@@ -85,13 +92,34 @@ To jest pole gry ziom!!!!
     }
     public string GetStyle(int row, int column)
     {
-
+        //if(gameService.GameField[row,column].nodeStatus==Helpers.NodeStatus.Bomb)
+        //{
+        //    return "bomb";
+        //}
+        //if (gameService.GameField[row, column].Visited)
+        //{
+        //    return "hidden";
+        //}
+        //
+        //return "empty";
         if (gameService.GameField[row, column].Visited)
         {
-            return "hidden";
+            switch (gameService.GameField[row, column].nodeStatus)
+            {
+                case Helpers.NodeStatus.One:
+                    return "one";
+                case Helpers.NodeStatus.Bomb:
+                    return "bomb";
+                default:
+                    return "empty";
+            }
         }
+        else if(gameService.GameField[row,column].IsFlagged)
+        {
+            return "flagged";
+        } else
 
-        return "empty";
+        return "hidden";
     }
 
     public void DbClicked()

@@ -21,6 +21,7 @@ namespace Saper.Blazor.Helpers
         Flag,
     }
 
+
     public class Helper
     {
     }

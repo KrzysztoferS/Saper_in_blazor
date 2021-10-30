@@ -10,7 +10,7 @@ namespace Saper.Blazor.Contollers
 
     public class GameController
     {
-        public int NumberOfVisitedNodes { get; private set; }
+        public int NumberOfVisitedNodes { get; set; }
         public int NumberOfClicks { get; set; }
 
         private INodeFinder nodeFinder;
@@ -133,7 +133,11 @@ namespace Saper.Blazor.Contollers
 
         public void SetNodeAsVisited(GameNode gameNode)
         {
-            gameNode.Visited = true;
+            if (!gameNode.Visited)
+            {
+                gameNode.Visited = true;
+                NumberOfVisitedNodes+=1;
+            }
         }
 
         public void OpenNodes(GameNode[,] gameField, GameNode gameNode)
@@ -156,7 +160,29 @@ namespace Saper.Blazor.Contollers
             else gameNode.IsFlagged = false;
         }
 
-       
+        public bool IsGameOver(GameNode[,] gameField, GameNode gameNode, int numberOfBombs)
+        {
+            int requiredNumberOfVisitedNodesToWin = gameField.Length-numberOfBombs;
+            int number = GetNumberOfVisitedNodes(gameField);
+
+            if (gameNode.nodeStatus == Helpers.NodeStatus.Bomb || number == requiredNumberOfVisitedNodesToWin)
+            {
+                return true;
+            }
+            else return false;
+            
+        }
+
+        public int GetNumberOfVisitedNodes(GameNode[,] gameField)
+        {
+            int number = 0;
+            foreach(var node in gameField)
+            {
+                if (node.Visited) number++;
+            }
+            NumberOfVisitedNodes = number;
+            return number;
+        }
 
     }
 

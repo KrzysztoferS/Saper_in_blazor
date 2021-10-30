@@ -130,5 +130,23 @@ namespace Saper.Test
             Assert.AreEqual(8, list.Count);
         }
 
+        [Test]
+        public void WinLooseCondition1()
+        {
+            _gameController.NumberOfVisitedNodes = 1;
+            _gameController.FillGameField(gameField);
+            gameField[0, 0].nodeStatus = Blazor.Helpers.NodeStatus.Empty;
+           bool value =_gameController.IsGameOver(gameField, gameField[0, 0], 8);
+            Assert.AreEqual(value,true);
+        }
+        [Test]
+        public void WinLooseCondition2()
+        {
+            _gameController.NumberOfVisitedNodes = 1;
+            _gameController.FillGameField(gameField);
+            gameField[0, 0].nodeStatus = Blazor.Helpers.NodeStatus.Bomb;
+            bool value = _gameController.IsGameOver(gameField, gameField[0, 0],5);
+            Assert.AreEqual(value, true);
+        }
     }
 }
