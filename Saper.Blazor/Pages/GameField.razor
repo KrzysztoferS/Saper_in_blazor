@@ -34,7 +34,7 @@ To jest pole gry ziom!!!!
         </tr>
     }
 </table>
-<button @onclick="_GameService.Restart">RESTART</button>
+
 <div>Liczba odwiedzoanych wezłów: @visitedNodes </div>
 <div>GameOver:@gameOver   </div>
     <div>Kliknieto pole:@clickedRow , @clickedCol  </div>
@@ -104,16 +104,22 @@ To jest pole gry ziom!!!!
         //return "empty";
         if (gameService.GameField[row, column].Visited)
         {
-            switch (gameService.GameField[row, column].nodeStatus)
+            if (!gameOver)
             {
-                case Helpers.NodeStatus.One:
-                    return "one";
-                case Helpers.NodeStatus.Bomb:
-                    return "bomb";
-                default:
-                    return "empty";
+                switch (gameService.GameField[row, column].nodeStatus)
+                {
+                    case Helpers.NodeStatus.One:
+                        return "one";
+                    case Helpers.NodeStatus.Bomb:
+                        return "bomb";
+                    default:
+                        return "empty";
+                }
             }
+            else if (gameService.GameResult()) return "win";
+            else return "loose";
         }
+
         else if(gameService.GameField[row,column].IsFlagged)
         {
             return "flagged";

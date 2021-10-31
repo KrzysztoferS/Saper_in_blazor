@@ -5,6 +5,11 @@ td{
     border:2px solid red;
     text-align:center;
 }
+
+td:hover{
+    background-color:#ffd800;
+    border:3px dashed #002cff;
+}
 .flagged {
     background-color: #808080;
     color:red;
@@ -25,6 +30,7 @@ td{
     animation-name:flash;
     animation-duration:2s;
 }
+
 .one {
     background-color: #e5e5e5;
     color: #002cff;
@@ -36,13 +42,47 @@ td{
     background-color:#ff0000;
 }
 
-@keyframes flash{
+.win {
+    background-color: #00ff21;
+    animation-name: win;
+    animation-duration: 4s;
+}
+
+.loose {
+    background-color: #d90808;
+    animation-name: loose;
+    animation-duration: 4s;
+}
+
+@keyframes flash {
     from {
         background-color: #808080;
         color: #808080;
     }
+
     to {
         background-color: #e5e5e5;
         color: #002cff;
+    }
+}
+
+@keyframes win {
+    from {
+        background-color: #e5e5e5;
+    }
+
+    to {
+        background-color: #00ff21;
+        
+    }
+}
+
+@keyframes loose {
+    from {
+        background-color: #e5e5e5;
+    }
+
+    to {
+        background-color: #d90808;
     }
 }

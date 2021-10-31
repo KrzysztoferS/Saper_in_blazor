@@ -12,6 +12,7 @@ namespace Saper.Blazor.Contollers
     {
         public int NumberOfVisitedNodes { get; set; }
         public int NumberOfClicks { get; set; }
+        public bool PlayerWin { get; set; }
 
         private INodeFinder nodeFinder;
 
@@ -165,12 +166,33 @@ namespace Saper.Blazor.Contollers
             int requiredNumberOfVisitedNodesToWin = gameField.Length-numberOfBombs;
             int number = GetNumberOfVisitedNodes(gameField);
 
-            if (gameNode.nodeStatus == Helpers.NodeStatus.Bomb || number == requiredNumberOfVisitedNodesToWin)
+            if (gameNode.nodeStatus == Helpers.NodeStatus.Bomb)
             {
+                PlayerWin = false;
+                return true;
+            } else if(number == requiredNumberOfVisitedNodesToWin)
+            {
+                PlayerWin = true;
                 return true;
             }
             else return false;
             
+        }
+
+        public void Win(GameNode[,] gameField)
+        {
+            foreach (var node in gameField)
+            {
+                if (node.Visited) node.nodeStatus = Helpers.NodeStatus.Win;
+            }
+        }
+
+        public void Loose(GameNode[,] gameField)
+        {
+            foreach (var node in gameField)
+            {
+                if (node.Visited) node.nodeStatus = Helpers.NodeStatus.Loose;
+            }
         }
 
         public int GetNumberOfVisitedNodes(GameNode[,] gameField)
@@ -182,6 +204,15 @@ namespace Saper.Blazor.Contollers
             }
             NumberOfVisitedNodes = number;
             return number;
+        }
+
+        public void Restart(GameNode[,] gameField)
+        {
+            foreach(var node in gameField)
+            {
+                node.Visited = false;
+                NumberOfVisitedNodes = 0;
+            }
         }
 
     }

@@ -9,9 +9,9 @@ namespace Saper.Blazor.Services
 {
     public class GameService
     {
-        readonly int numberOfRows;
-        readonly int numberOfColumns;
-        readonly int numberOfBombs;
+        private int numberOfRows;
+        private int numberOfColumns;
+        private int numberOfBombs;
 
         public GameNode[,] GameField { get; private set; }
 
@@ -74,17 +74,9 @@ namespace Saper.Blazor.Services
             gameController.SetFlag(GameField[row, col]);
         }
 
-
-        public void Win()
+        public bool GameResult()
         {
-            //TODO
-           
-        }
-
-        public void Loose()
-        {
-            //TODO
-          
+            return gameController.PlayerWin;
         }
 
         public int VistedNodes()
@@ -94,7 +86,8 @@ namespace Saper.Blazor.Services
 
         public void Restart()
         {
-            StartGame();
+            gameController.Restart(GameField);
+            gameOver = false;
         }
     }
 }

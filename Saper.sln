@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saper.Blazor", "Saper.Blazor\Saper.Blazor.csproj", "{48AEE8FB-0575-4E88-8CC8-E8959876DF98}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Saper.Test", "Saper.Test\Saper.Test.csproj", "{EBFA74A3-9C44-41A2-A5C8-0AD9C63F4850}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Saper.Test", "Saper.Test\Saper.Test.csproj", "{EBFA74A3-9C44-41A2-A5C8-0AD9C63F4850}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

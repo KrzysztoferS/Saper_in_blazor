@@ -19,6 +19,8 @@ namespace Saper.Blazor.Helpers
         Eight,
         Bomb,
         Flag,
+        Win,
+        Loose
     }
 
 

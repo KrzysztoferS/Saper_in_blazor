@@ -1,21 +1,68 @@
 ﻿@page "/saper"
 @using Services;
+@using Models;
 
 
 <h3>SaperMainPage</h3>
-<Timer></Timer>
-<GameField _GameService="@_gameService"></GameField>
+Rows=@GameLevel.Rows
+Columns=@GameLevel.Columns
+Bombs=@GameLevel.Bombs
+
+@if (_gameService == null || gameLevel.Bombs==0)
+{
+    <DifficultyLevelMenu @bind-GameLevelValue=GameLevel></DifficultyLevelMenu>
+}
+else
+{
+    <GameField _GameService="@_gameService"></GameField>
+    <button @onclick="@StartNewGame">New Game</button>
+    <button @onclick="@Restart">Restart</button>
+}
 
 
 @code {
 
     GameService _gameService;
-    
+
+    private GameLevel gameLevel;
+
+    [Parameter]
+    public GameLevel GameLevel
+    {
+        get => gameLevel; set
+        {
+            gameLevel = value;
+            if(value.Rows>0 && value.Columns>0 && value.Bombs<(value.Rows*value.Columns))
+                StartGame();
+        }
+    }
+
+
+    void StartGame()
+    {
+        _gameService = new GameService(gameLevel.Rows, gameLevel.Columns, gameLevel.Bombs);
+    }
+
+    void StartNewGame()
+    {
+        GameLevel = new GameLevel() { Bombs = 0, Rows = 0, Columns = 0 };
+    }
+
+    void Restart()
+    {
+        _gameService.Restart();
+        //StateHasChanged();
+    }
+
 
     protected override void OnInitialized()
     {
         //base.OnInitialized();
-        _gameService = new GameService(15, 15, 15);
+        //_gameService = new GameService(10, 10, 10);
+        GameLevel = new GameLevel();
         //_gameService.StartGame();
+        //gameIsOn = false
     }
+
+
 }
