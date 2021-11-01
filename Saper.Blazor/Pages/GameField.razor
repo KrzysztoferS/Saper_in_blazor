@@ -90,18 +90,9 @@ To jest pole gry ziom!!!!
     {
         return "dd";
     }
+
     public string GetStyle(int row, int column)
     {
-        //if(gameService.GameField[row,column].nodeStatus==Helpers.NodeStatus.Bomb)
-        //{
-        //    return "bomb";
-        //}
-        //if (gameService.GameField[row, column].Visited)
-        //{
-        //    return "hidden";
-        //}
-        //
-        //return "empty";
         if (gameService.GameField[row, column].Visited)
         {
             if (!gameOver)

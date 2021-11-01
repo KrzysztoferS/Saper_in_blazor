@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Saper.Blazor.Abstraction
 {
-    interface ITimer
+    public interface ITimer
     {
         public float Time { get; set; }
         public bool TimeIsOn { get; set; }

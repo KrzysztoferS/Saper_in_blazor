@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Saper.Blazor.Abstraction
 {
-    interface INodeFinder
+    public interface INodeFinder
     {
         public List<GameNode> FindNodes(GameNode[,] gameField, GameNode gameNode);
     }

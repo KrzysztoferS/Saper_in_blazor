@@ -1,24 +1,27 @@
-﻿<h3>Timer:@time</h3>
-<button @onclick="Clock">Start Time</button>
+﻿@using Abstraction; 
+
+<h3>@time</h3>
 @code {
 
-   
-    public int time = 0;
-    bool clocksOn = false;
+    [Parameter]
+    public  ITimer Timer { get; set; }
 
-    public async void Clock()
-    {
-        if (!clocksOn)
-        {
-            clocksOn = true;
-            for (int i = 0; i < 35; i++)
-            {
-                time = i;
+    //public int time = 0;
+    //bool clocksOn = false;
 
-                await Task.Delay(1000);
-                StateHasChanged();
-            }
-            clocksOn = false;
-        }
-    }
+    //public async void StartClock()
+    //{
+    //    if (!clocksOn)
+    //    {
+    //        clocksOn = true;
+    //        for (int i = 0; i < 35; i++)
+    //        {
+    //            time = i;
+    //
+    //            await Task.Delay(1000);
+    //            StateHasChanged();
+    //        }
+    //        clocksOn = false;
+    //    }
+    //}
 }
