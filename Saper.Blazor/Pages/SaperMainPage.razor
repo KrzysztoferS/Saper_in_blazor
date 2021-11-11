@@ -8,7 +8,7 @@ Rows=@GameLevel.Rows
 Columns=@GameLevel.Columns
 Bombs=@GameLevel.Bombs
 
-@if (_gameService == null || gameLevel.Bombs==0)
+@if (_gameService == null || gameLevel.Bombs == 0)
 {
     <DifficultyLevelMenu @bind-GameLevelValue=GameLevel></DifficultyLevelMenu>
 }
@@ -25,6 +25,7 @@ else
     GameService _gameService;
 
     private GameLevel gameLevel;
+    private bool gameIsOn=false;
 
     [Parameter]
     public GameLevel GameLevel
@@ -32,7 +33,7 @@ else
         get => gameLevel; set
         {
             gameLevel = value;
-            if(value.Rows>0 && value.Columns>0 && value.Bombs<(value.Rows*value.Columns))
+            if (value.Rows > 0 && value.Columns > 0 && value.Bombs < (value.Rows * value.Columns))
                 StartGame();
         }
     }
@@ -41,17 +42,19 @@ else
     void StartGame()
     {
         _gameService = new GameService(gameLevel.Rows, gameLevel.Columns, gameLevel.Bombs);
+        gameIsOn = true;
     }
 
     void StartNewGame()
     {
         GameLevel = new GameLevel() { Bombs = 0, Rows = 0, Columns = 0 };
+        gameIsOn = true;
     }
 
     void Restart()
     {
         _gameService.Restart();
-        //StateHasChanged();
+        gameIsOn = true;
     }
 
 
@@ -64,5 +67,9 @@ else
         //gameIsOn = false
     }
 
+    bool IsGameOn()
+    {
+        return !_gameService.gameOver;
+    }
 
 }

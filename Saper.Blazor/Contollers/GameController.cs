@@ -211,6 +211,7 @@ namespace Saper.Blazor.Contollers
             foreach(var node in gameField)
             {
                 node.Visited = false;
+                node.IsFlagged = false;
                 NumberOfVisitedNodes = 0;
             }
         }

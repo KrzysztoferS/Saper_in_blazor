@@ -6,36 +6,39 @@ using System.Threading.Tasks;
 
 namespace Saper.Blazor.Contollers
 {
-    public class TimeController : ITimer
+    public class TimeController 
     {
-        public float Time { get; set; }
-        public bool TimeIsOn { get; set; }
+        private bool timeIsOn;
 
-        public TimeController()
-        {
-            Time = 0;
-            TimeIsOn = false;
-        }
+        public delegate void TimeChangeHandler(object source, EventArgs args);
+        public event TimeChangeHandler TimeChanged;
 
-        public async void StartTime()
+        protected virtual void OnTimeChanged()
         {
-            TimeIsOn = true;
-            Time = 0;
-            while (TimeIsOn)
+            if (TimeChanged != null)
             {
-                for (int i = 0; i < 10; i++)
-                {
-                    await Task.Delay(100);
-                }
-                Time++;
-                //Tutaj rzucic evetem ze minela sekunda
+                TimeChanged(this, EventArgs.Empty);
             }
         }
 
-        public float StopTime()
+        async public void StartTimeChange()
         {
-            TimeIsOn = false;
-            return Time;
+            if (timeIsOn) return;
+            timeIsOn = true;
+            while (timeIsOn)
+            {
+                for(int i=0; i<10; i++)
+                {
+                    if (timeIsOn == false) return;
+                    await Task.Delay(100);
+                }
+                OnTimeChanged();
+            }
+        }
+
+        public void StopTimeChange()
+        {
+            timeIsOn = false;
         }
     }
 }

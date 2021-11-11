@@ -1,27 +1,39 @@
-﻿@using Abstraction; 
+﻿@using Abstraction;
+@using Services;
 
-<h3>@time</h3>
+<h3>Time:@Time</h3>
 @code {
+    [Parameter]
+    public int Time { get; set; }
+    [Parameter]
+    public EventCallback<int> TimeChanged { get; set; }
+
+    async Task UpdateTime()
+    {
+        await TimeChanged.InvokeAsync(Time);
+    }
 
     [Parameter]
-    public  ITimer Timer { get; set; }
+    public bool GameIsOn { get; set; }
+    [Parameter]
+    public EventCallback<bool> GameIsOnChanged { get; set; }
 
-    //public int time = 0;
-    //bool clocksOn = false;
+    async Task UpdateGameIsOn()
+    {
+        await GameIsOnChanged.InvokeAsync(GameIsOn);
+        StartClock();
+    }
 
-    //public async void StartClock()
-    //{
-    //    if (!clocksOn)
-    //    {
-    //        clocksOn = true;
-    //        for (int i = 0; i < 35; i++)
-    //        {
-    //            time = i;
-    //
-    //            await Task.Delay(1000);
-    //            StateHasChanged();
-    //        }
-    //        clocksOn = false;
-    //    }
-    //}
+
+
+    public async void StartClock()
+    {
+        Time = 0;
+        while (GameIsOn)
+        {
+            await Task.Delay(1000);
+            Time++;
+            StateHasChanged();
+        }
+    }
 }

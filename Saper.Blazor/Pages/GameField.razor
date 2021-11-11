@@ -2,7 +2,7 @@
 
 <link rel="stylesheet" href="css/NodeStyle.css" />
 <h3>GameField</h3>
-
+<h3>Time:@gameService.GetTime()</h3>
 To jest pole gry ziom!!!!
 <table>
     @for (int i = 0; i < numberOfRows; i++)
@@ -56,9 +56,9 @@ To jest pole gry ziom!!!!
         gameService = _GameService;
         numberOfRows = _GameService.GameField.GetLength(0);
         numberOfColumns = _GameService.GameField.GetLength(1);
+        gameService.ParametersChanged += UpdatadeView;
     }
 
-    // private GameService gameService;
 
     public int clickedRow, clickedCol;
     public bool dbClick = false;
@@ -129,4 +129,9 @@ To jest pole gry ziom!!!!
         dbClick = true;
     }
 
+    public void UpdatadeView(object source, EventArgs args)
+    {
+        gameOver = gameService.gameOver;
+        StateHasChanged();
+    }
 }
