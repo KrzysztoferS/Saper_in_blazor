@@ -1,9 +1,10 @@
 ﻿
-td{
-    width:40px;
-    height:40px;
-    border:2px solid red;
-    text-align:center;
+td {
+    width: 40px;
+    height: 40px;
+    border: 2px solid red;
+    text-align: center;
+    font-weight: bold;
 }
 
 
@@ -34,11 +35,59 @@ td:hover{
 
 .one {
     background-color: #e5e5e5;
-    color: #002cff;
+    color: #fb0404;
     animation-name: flash;
     animation-duration: 2s;
     
 }
+.two {
+    background-color: #e5e5e5;
+    color: #fb8a00;
+    animation-name: flash;
+    animation-duration: 2s;
+}
+
+.three {
+    background-color: #e5e5e5;
+    color: #88a803;
+    animation-name: flash;
+    animation-duration: 2s;
+}
+
+.four {
+    background-color: #e5e5e5;
+    color: #05c44f;
+    animation-name: flash;
+    animation-duration: 2s;
+}
+
+.five {
+    background-color: #e5e5e5;
+    color: #003ed3;
+    animation-name: flash;
+    animation-duration: 2s;
+}
+.six {
+    background-color: #e5e5e5;
+    color: #9c00ef;
+    animation-name: flash;
+    animation-duration: 2s;
+}
+
+.seven {
+    background-color: #e5e5e5;
+    color: #fb51d3;
+    animation-name: flash;
+    animation-duration: 2s;
+}
+
+.eight {
+    background-color: #e5e5e5;
+    color: #8d2632;
+    animation-name: flash;
+    animation-duration: 2s;
+}
+
 .bomb{
     background-color:#ff0000;
 }
@@ -58,12 +107,12 @@ td:hover{
 @keyframes flash {
     from {
         background-color: #808080;
-        color: #808080;
+        
     }
 
     to {
         background-color: #e5e5e5;
-        color: #002cff;
+        
     }
 }
 
