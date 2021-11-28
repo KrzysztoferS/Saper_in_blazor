@@ -179,22 +179,6 @@ namespace Saper.Blazor.Contollers
             
         }
 
-        public void Win(GameNode[,] gameField)
-        {
-            foreach (var node in gameField)
-            {
-                if (node.Visited) node.nodeStatus = Helpers.NodeStatus.Win;
-            }
-        }
-
-        public void Loose(GameNode[,] gameField)
-        {
-            foreach (var node in gameField)
-            {
-                if (node.Visited) node.nodeStatus = Helpers.NodeStatus.Loose;
-            }
-        }
-
         public int GetNumberOfVisitedNodes(GameNode[,] gameField)
         {
             int number = 0;
