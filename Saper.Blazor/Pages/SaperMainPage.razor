@@ -3,29 +3,40 @@
 @using Models;
 
 
-<h3>SaperMainPage</h3>
-Rows=@GameLevel.Rows
-Columns=@GameLevel.Columns
-Bombs=@GameLevel.Bombs
+<center>
 
-@if (_gameService == null || gameLevel.Bombs == 0)
-{
-    <DifficultyLevelMenu @bind-GameLevelValue=GameLevel></DifficultyLevelMenu>
-}
-else
-{
-    <GameField _GameService="@_gameService"></GameField>
-    <button @onclick="@StartNewGame">New Game</button>
-    <button @onclick="@Restart">Restart</button>
-    <div><ul>
-        <li><h3>Instrukcja gry:</h3></li>
-        <li>Odkryj wszystkie pola nie zawierające bomby, zanim upłynie czas.</li>
-        <li>Lewy klawisz myszy odkrywa pole</li>
-        <li>Prawy kalwisz myszy oznacza pole</li>
-        </ul></div>
-    
-}
+    @if (_gameService == null || gameLevel.Bombs == 0)
+    {
+        <DifficultyLevelMenu @bind-GameLevelValue=GameLevel></DifficultyLevelMenu>
+    }
+    else
+    {
+                if (gameIsOn)
+                {
+                    <h2> Game is ON!</h2>
+        } else
+        {
+            if (_gameService.GameResult())
+            {
+                        <h2>!!!YOU WIN!!!</h2>
+            }
+            else
+            {<h2>GAME OVER</h2>}
+                
+        <GameField _GameService="@_gameService"></GameField>
+        <button @onclick="@StartNewGame">New Game</button>
+        <button @onclick="@Restart">Restart</button>
+        <div>
+            <ul>
+                <li><h3>Instrukcja gry:</h3></li>
+                <li>Odkryj wszystkie pola nie zawierające bomby, zanim upłynie czas.</li>
+                <li>Lewy klawisz myszy odkrywa pole</li>
+                <li>Prawy kalwisz myszy oznacza pole</li>
+            </ul>
+        </div>
 
+    }
+</center>
 
 @code {
 
